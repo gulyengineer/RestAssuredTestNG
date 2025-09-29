@@ -1,21 +1,18 @@
-package com.example.model.response;
+package com.example.models.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Data                       // generates getters, setters, toString, equals, hashCode
 @NoArgsConstructor          // generates no-args constructor
 @AllArgsConstructor         // generates all-args constructor
 
-public class LoginResponse {
-    private String token;
-    private String type;
-    private int id;
+public class SignupRequest {
     private String username;
+    private String password;
     private String email;
-    private List<String> roles;
+    private String firstName;
+    private String lastName;
+    private String mobileNumber;
 }
-
