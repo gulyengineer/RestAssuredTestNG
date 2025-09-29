@@ -33,6 +33,7 @@
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.20.0" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-core:2.20.0" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.20" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.projectlombok:lombok:1.18.42" level="project" />
   </component>
   <component name="SonarLintModuleSettings">
     <option name="uniqueId" value="3021160f-828b-445c-846c-633072d4b8c2" />
