@@ -8,6 +8,7 @@ import org.testng.annotations.Test;
 
 import static com.example.utils.UserCredentials.*;
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNotNull;
 
 public class LoginAPITest {
     @Test(description = "Test login API")
@@ -16,10 +17,8 @@ public class LoginAPITest {
         LoginRequest loginRequest = new LoginRequest(username, password);
         Response response = authService.login(loginRequest);
         LoginResponse loginResponse = response.as(LoginResponse.class);
-        System.out.println(response.asPrettyString());
-        System.out.println(loginResponse.getToken());
-        //assertNotNull(loginResponse.getToken());
+        assertNotNull(loginResponse.getToken(), "Login token should not be null");
         assertEquals(loginResponse.getEmail(), email);
-        //assertEquals(loginResponse.getId(), 2891);
+        assertEquals(loginResponse.getId(), 2891);
     }
 }

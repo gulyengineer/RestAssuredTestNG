@@ -9,6 +9,8 @@ import org.testng.annotations.Test;
 
 import static com.example.utils.UserCredentials.password;
 import static com.example.utils.UserCredentials.username;
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertNotNull;
 
 public class GetProfileTest {
     @Test(description = "Test get profile API")
@@ -16,6 +18,8 @@ public class GetProfileTest {
         AuthService authService = new AuthService();
         Response response = authService.login(new LoginRequest(username, password));
         LoginResponse loginResponse = response.as(LoginResponse.class);
+        assertNotNull(loginResponse.getToken(), "Login token should not be null");
+        assertFalse(loginResponse.getToken().isBlank(), "Login token should not be blank");
         UserService userService = new UserService();
         Response userProfileResponse = userService.getProfile(loginResponse.getToken());
         System.out.println(userProfileResponse.asPrettyString());
