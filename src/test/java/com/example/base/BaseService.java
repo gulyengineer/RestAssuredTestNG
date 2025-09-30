@@ -13,7 +13,15 @@ public class BaseService { // Wrapper for Rest Assured
         requestSpecification = RestAssured.given().baseUri(BASE_URI);
     }
 
+    protected void setAuthToken(String token) {
+        requestSpecification.header("Authorization", "Bearer " + token);
+    }
+
     protected Response postRequest(Object payload, String endpoint) {
         return requestSpecification.contentType(ContentType.JSON).body(payload).post(endpoint);
+    }
+
+    protected Response getRequest(String endpoint) {
+        return requestSpecification.get(endpoint);
     }
 }

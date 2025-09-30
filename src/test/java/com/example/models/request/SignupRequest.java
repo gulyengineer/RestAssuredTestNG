@@ -5,9 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data                       // generates getters, setters, toString, equals, hashCode
-@NoArgsConstructor          // generates no-args constructor
-@AllArgsConstructor         // generates all-args constructor
-
+@NoArgsConstructor
+@AllArgsConstructor
 public class SignupRequest {
     private String username;
     private String password;

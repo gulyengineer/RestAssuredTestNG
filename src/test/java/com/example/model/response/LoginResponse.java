@@ -1,5 +1,6 @@
 package com.example.model.response;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -7,9 +8,9 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 
 @Data                       // generates getters, setters, toString, equals, hashCode
-@NoArgsConstructor          // generates no-args constructor
-@AllArgsConstructor         // generates all-args constructor
-
+@NoArgsConstructor
+@AllArgsConstructor
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class LoginResponse {
     private String token;
     private String type;
