@@ -19,7 +19,8 @@ public class SignupTest {
         String email = "user_" + UUID.randomUUID().toString().substring(0, 8) + "@test.com";
         String firstName = "User";
         String lastName = "Test";
-        String phone = String.format("%010d", random.nextInt(1_000_000_000));
+        // Generates a 10-digit number starting with a digit from 1-9
+        String phone = (random.nextInt(9) + 1) + String.format("%09d", random.nextInt(1_000_000_000));
 
         AuthService authService = new AuthService();
         SignupRequest signupRequest = new SignupRequest(username, password, email, firstName, lastName, phone);

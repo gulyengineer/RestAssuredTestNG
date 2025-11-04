@@ -16,6 +16,9 @@ import static com.example.utils.UserCredentials.*;
 import static org.testng.Assert.*;
 
 public class UpdateProfileTest {
+    private UserProfileResponse originalProfile;
+    private String token;
+
     @Test(description = "Test update profile API")
     public void updateProfileTest() {
         Random random = new Random();
@@ -26,14 +29,20 @@ public class UpdateProfileTest {
         AuthService authService = new AuthService();
         Response response = authService.login(new LoginRequest(username, password));
         LoginResponse loginResponse = response.as(LoginResponse.class);
-        assertNotNull(loginResponse.getToken(), "Login token should not be null");
-        assertFalse(loginResponse.getToken().isBlank(), "Login token should not be blank");
+        token = loginResponse.getToken();
+        assertNotNull(token, "Login token should not be null");
+        assertFalse(token.isBlank(), "Login token should not be blank");
         UserService userService = new UserService();
         ProfileRequest profileRequest = new ProfileRequest(firstName, lastName, email, phone);
-        Response profileResponse = userService.updateProfile(loginResponse.getToken(), profileRequest);
+        // Get and store the original profile data
+        originalProfile = userService.getProfile(token).as(UserProfileResponse.class);
+        Response profileResponse = userService.updateProfile(token, profileRequest);
 
         UserProfileResponse updateProfileResponse = profileResponse.as(UserProfileResponse.class);
         assertEquals(updateProfileResponse.getFirstName(), firstName);
 
+        // Restore the original profile data
+        ProfileRequest restoreRequest = new ProfileRequest(originalProfile.getFirstName(), originalProfile.getLastName(), originalProfile.getEmail(),originalProfile.getMobileNumber());
+        userService.updateProfile(this.token, restoreRequest);
     }
 }
