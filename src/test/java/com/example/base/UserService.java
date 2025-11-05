@@ -1,6 +1,6 @@
 package com.example.base;
 
-import com.example.models.request.ProfileRequest;
+import com.example.model.request.ProfileRequest;
 import io.restassured.response.Response;
 
 public class UserService extends BaseService {
