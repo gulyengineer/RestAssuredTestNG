@@ -2,7 +2,7 @@ package com.example.tests;
 
 import com.example.base.AuthService;
 import com.example.model.response.LoginResponse;
-import com.example.models.request.LoginRequest;
+import com.example.model.request.LoginRequest;
 import io.restassured.response.Response;
 import org.testng.annotations.Test;
 
