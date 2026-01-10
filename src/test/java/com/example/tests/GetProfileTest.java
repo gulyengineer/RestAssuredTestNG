@@ -6,12 +6,14 @@ import com.example.model.response.LoginResponse;
 import com.example.model.response.UserProfileResponse;
 import com.example.model.request.LoginRequest;
 import io.restassured.response.Response;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import static com.example.utils.UserCredentials.password;
 import static com.example.utils.UserCredentials.username;
 import static org.testng.Assert.*;
 
+@Listeners(com.example.listeners.TestListener.class)
 public class GetProfileTest {
     @Test(description = "Test get profile API")
     public void getProfileTest() {

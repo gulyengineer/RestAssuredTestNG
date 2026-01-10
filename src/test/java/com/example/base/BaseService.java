@@ -1,5 +1,6 @@
 package com.example.base;
 
+import com.example.filters.LoggingFilter;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
@@ -8,6 +9,10 @@ import io.restassured.specification.RequestSpecification;
 public class BaseService { // Wrapper for Rest Assured
     public static final String BASE_URI = "http://64.227.160.186:8080/";
     private final RequestSpecification requestSpecification;
+
+    static {
+        RestAssured.filters(new LoggingFilter());
+    }
 
     public BaseService() {
         requestSpecification = RestAssured.given().baseUri(BASE_URI);

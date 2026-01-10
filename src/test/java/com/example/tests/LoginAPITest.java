@@ -4,12 +4,14 @@ import com.example.base.AuthService;
 import com.example.model.response.LoginResponse;
 import com.example.model.request.LoginRequest;
 import io.restassured.response.Response;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import static com.example.utils.UserCredentials.*;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 
+@Listeners(com.example.listeners.TestListener.class)
 public class LoginAPITest {
     @Test(description = "Test login API")
     public void login() {
