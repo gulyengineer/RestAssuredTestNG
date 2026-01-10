@@ -20,4 +20,8 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Test Execution
+      env:
+          TEST_USERNAME: ${{ secrets.TEST_USERNAME }}
+          TEST_PASSWORD: ${{ secrets.TEST_PASSWORD }}
+          TEST_EMAIL: ${{ secrets.TEST_EMAIL }}
       run: mvn clean test -Dsuite=suite -X
