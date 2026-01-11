@@ -25,3 +25,12 @@ jobs:
           TEST_PASSWORD: ${{ secrets.TEST_PASSWORD }}
           TEST_EMAIL: ${{ secrets.TEST_EMAIL }}
       run: mvn clean test -Dsuite=suite -X
+
+    - name: Publish Test Report
+      if: always()
+      uses: dorny/test-reporter@v1
+      with:
+        name: TestNG Results
+        path: target/surefire-reports/junitreports/TEST-*.xml
+        reporter: java-junit
+
