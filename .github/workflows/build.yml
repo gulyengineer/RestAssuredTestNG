@@ -10,7 +10,10 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-
+    permissions:
+      contents: read
+      checks: write
+      issues: write
     steps:
     - uses: actions/checkout@v4
     - name: Set up JDK 17
@@ -25,7 +28,6 @@ jobs:
           TEST_PASSWORD: ${{ secrets.TEST_PASSWORD }}
           TEST_EMAIL: ${{ secrets.TEST_EMAIL }}
       run: mvn clean test -Dsuite=suite -X
-
     - name: Publish Test Report
       if: always()
       uses: dorny/test-reporter@v1
