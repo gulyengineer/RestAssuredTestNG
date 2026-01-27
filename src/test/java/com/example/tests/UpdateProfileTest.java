@@ -44,7 +44,8 @@ public class UpdateProfileTest {
                 originalProfile.getMobileNumber()
         );
 
-        userService.updateProfile(token, restoreRequest);
+        Response restoreResponse = userService.updateProfile(token, restoreRequest);
+        assertEquals(restoreResponse.getStatusCode(), 200, "Profile restoration failed");
     }
 
     private String loginAndGetToken() {
