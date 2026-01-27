@@ -2,47 +2,58 @@ package com.example.tests;
 
 import com.example.base.AuthService;
 import com.example.base.UserService;
-import com.example.model.response.LoginResponse;
-import com.example.model.response.UserProfileResponse;
 import com.example.model.request.LoginRequest;
 import com.example.model.request.ProfileRequest;
+import com.example.model.response.LoginResponse;
+import com.example.model.response.UserProfileResponse;
 import io.restassured.response.Response;
 import org.testng.annotations.Test;
 
-import java.util.Random;
-import java.util.UUID;
-
-import static com.example.utils.UserCredentials.*;
-import static org.testng.Assert.*;
+import static com.example.utils.TestDataUtils.DEFAULT_FIRST_NAME;
+import static com.example.utils.TestDataUtils.DEFAULT_LAST_NAME;
+import static com.example.utils.TestDataUtils.randomPhone;
+import static com.example.utils.TestDataUtils.randomSuffix;
+import static com.example.utils.UserCredentials.email;
+import static com.example.utils.UserCredentials.password;
+import static com.example.utils.UserCredentials.username;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertNotNull;
 
 public class UpdateProfileTest {
-    private UserProfileResponse originalProfile;
-    private String token;
-
     @Test(description = "Test update profile API")
     public void updateProfileTest() {
-        Random random = new Random();
-        String firstName = "User " + UUID.randomUUID().toString().charAt(0);
-        String lastName = "Test " + UUID.randomUUID().toString().charAt(0);
-        String phone = String.format("%010d", random.nextInt(1_000_000_000));
+        String firstName = DEFAULT_FIRST_NAME + " " + randomSuffix();
+        String lastName = DEFAULT_LAST_NAME + " " + randomSuffix();
+        String phone = randomPhone();
 
-        AuthService authService = new AuthService();
-        Response response = authService.login(new LoginRequest(username, password));
-        LoginResponse loginResponse = response.as(LoginResponse.class);
-        token = loginResponse.getToken();
-        assertNotNull(token, "Login token should not be null");
-        assertFalse(token.isBlank(), "Login token should not be blank");
+        String token = loginAndGetToken();
         UserService userService = new UserService();
+
+        UserProfileResponse originalProfile = userService.getProfile(token).as(UserProfileResponse.class);
         ProfileRequest profileRequest = new ProfileRequest(firstName, lastName, email, phone);
-        // Get and store the original profile data
-        originalProfile = userService.getProfile(token).as(UserProfileResponse.class);
         Response profileResponse = userService.updateProfile(token, profileRequest);
 
         UserProfileResponse updateProfileResponse = profileResponse.as(UserProfileResponse.class);
         assertEquals(updateProfileResponse.getFirstName(), firstName);
 
-        // Restore the original profile data
-        ProfileRequest restoreRequest = new ProfileRequest(originalProfile.getFirstName(), originalProfile.getLastName(), originalProfile.getEmail(),originalProfile.getMobileNumber());
-        userService.updateProfile(this.token, restoreRequest);
+        ProfileRequest restoreRequest = new ProfileRequest(
+                originalProfile.getFirstName(),
+                originalProfile.getLastName(),
+                originalProfile.getEmail(),
+                originalProfile.getMobileNumber()
+        );
+
+        userService.updateProfile(token, restoreRequest);
+    }
+
+    private String loginAndGetToken() {
+        AuthService authService = new AuthService();
+        Response response = authService.login(new LoginRequest(username, password));
+        LoginResponse loginResponse = response.as(LoginResponse.class);
+        String token = loginResponse.getToken();
+        assertNotNull(token, "Login token should not be null");
+        assertFalse(token.isBlank(), "Login token should not be blank");
+        return token;
     }
 }
