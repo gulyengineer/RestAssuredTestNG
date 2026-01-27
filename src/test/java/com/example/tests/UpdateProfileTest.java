@@ -1,24 +1,18 @@
 package com.example.tests;
 
-import com.example.base.AuthService;
 import com.example.base.UserService;
-import com.example.model.request.LoginRequest;
 import com.example.model.request.ProfileRequest;
-import com.example.model.response.LoginResponse;
 import com.example.model.response.UserProfileResponse;
 import io.restassured.response.Response;
 import org.testng.annotations.Test;
 
+import static com.example.utils.AuthTestUtils.loginAndGetToken;
 import static com.example.utils.TestDataUtils.DEFAULT_FIRST_NAME;
 import static com.example.utils.TestDataUtils.DEFAULT_LAST_NAME;
 import static com.example.utils.TestDataUtils.randomPhone;
 import static com.example.utils.TestDataUtils.randomSuffix;
 import static com.example.utils.UserCredentials.email;
-import static com.example.utils.UserCredentials.password;
-import static com.example.utils.UserCredentials.username;
 import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertFalse;
-import static org.testng.Assert.assertNotNull;
 
 public class UpdateProfileTest {
     @Test(description = "Test update profile API")
@@ -46,16 +40,5 @@ public class UpdateProfileTest {
 
         Response restoreResponse = userService.updateProfile(token, restoreRequest);
         assertEquals(restoreResponse.getStatusCode(), 200, "Profile restoration failed");
-    }
-
-    private String loginAndGetToken() {
-        AuthService authService = new AuthService();
-        Response response = authService.login(new LoginRequest(username, password));
-        assertEquals(response.getStatusCode(), 200, "Expected login to succeed with status 200");
-        LoginResponse loginResponse = response.as(LoginResponse.class);
-        String token = loginResponse.getToken();
-        assertNotNull(token, "Login token should not be null");
-        assertFalse(token.isBlank(), "Login token should not be blank");
-        return token;
     }
 }
