@@ -25,7 +25,6 @@ public class SignupTest {
     }
 
     // Username is already taken scenario
-
     @Test(description = "Test signup API with existing username")
     public void signupWithExistingUsernameTest() {
         SignupRequest signupRequest = buildSignupRequest("TestUser", randomEmail());
@@ -35,7 +34,6 @@ public class SignupTest {
     }
 
     // Existing email scenario
-
     @Test(description = "Test signup API with existing email")
     public void signupWithExistingEmailTest() {
         SignupRequest signupRequest = buildSignupRequest(randomUsername(), UserCredentials.email);
@@ -44,6 +42,86 @@ public class SignupTest {
         assertEquals(response.getStatusCode(), 400);
 
     }
+
+    // Invalid email scenario
+    @Test(description = "Test signup API with invalid email")
+    public void signupWithInvalidEmailTest() {
+        SignupRequest signupRequest = buildSignupRequest(randomUsername(), "invalid_email@");
+        Response response = signup(signupRequest);
+        assertEquals(response.getStatusCode(), 500);
+    }
+
+    //  Invalid password scenario
+    @Test(description = "Test signup API with invalid password")
+    public void signupWithInvalidPasswordTest() {
+        SignupRequest signupRequest = buildSignupRequest(randomUsername(), randomEmail());
+        signupRequest.setPassword("123");
+        Response response = signup(signupRequest);
+        assertEquals(response.getStatusCode(), 500);
+    }
+
+
+    //Missing username scenario
+    @Test(description = "Test signup API with missing username")
+    public void signupWithMissingUsernameTest() {
+        SignupRequest signupRequest = buildSignupRequest("", randomEmail());
+        Response response = signup(signupRequest);
+        assertEquals(response.getStatusCode(), 500);
+    }
+
+    //Missing email scenario
+    @Test(description = "Test signup API with missing email")
+    public void signupWithMissingEmailTest() {
+        SignupRequest signupRequest = buildSignupRequest(randomUsername(), "");
+        Response response = signup(signupRequest);
+        assertEquals(response.getStatusCode(), 500);
+    }
+
+    //Missing password scenario
+    @Test(description = "Test signup API with missing password")
+    public void signupWithMissingPasswordTest() {
+        SignupRequest signupRequest = buildSignupRequest(randomUsername(), randomEmail());
+        signupRequest.setPassword("");
+        Response response = signup(signupRequest);
+        assertEquals(response.getStatusCode(), 500);
+    }
+
+    //Invalid phone number scenario
+    @Test(description = "Test signup API with invalid phone number")
+    public void signupWithInvalidPhoneTest() {
+        SignupRequest signupRequest = buildSignupRequest(randomUsername(), randomEmail());
+        signupRequest.setMobileNumber("123");
+        Response response = signup(signupRequest);
+        assertEquals(response.getStatusCode(), 500);
+    }
+
+    //Missing phone number scenario
+    @Test(description = "Test signup API with missing phone number")
+    public void signupWithMissingPhoneTest() {
+        SignupRequest signupRequest = buildSignupRequest(randomUsername(), randomEmail());
+        signupRequest.setMobileNumber("");
+        Response response = signup(signupRequest);
+        assertEquals(response.getStatusCode(), 500);
+    }
+
+    //Missing first name scenario
+    @Test(description = "Test signup API with missing first name")
+    public void signupWithMissingFirstNameTest() {
+        SignupRequest signupRequest = buildSignupRequest(randomUsername(), randomEmail());
+        signupRequest.setFirstName("");
+        Response response = signup(signupRequest);
+        assertEquals(response.getStatusCode(), 500);
+    }
+
+    //Missing last name scenario
+    @Test(description = "Test signup API with missing last name")
+    public void signupWithMissingLastNameTest() {
+        SignupRequest signupRequest = buildSignupRequest(randomUsername(), randomEmail());
+        signupRequest.setLastName("");
+        Response response = signup(signupRequest);
+        assertEquals(response.getStatusCode(), 500);
+    }
+
 
     private Response signup(SignupRequest signupRequest) {
         AuthService authService = new AuthService();
