@@ -50,6 +50,7 @@ public class UpdateProfileTest {
     private String loginAndGetToken() {
         AuthService authService = new AuthService();
         Response response = authService.login(new LoginRequest(username, password));
+        assertEquals(response.getStatusCode(), 200, "Expected login to succeed with status 200");
         LoginResponse loginResponse = response.as(LoginResponse.class);
         String token = loginResponse.getToken();
         assertNotNull(token, "Login token should not be null");

@@ -14,7 +14,7 @@ public class SignupTest {
     public void signupTest() {
         SignupRequest signupRequest = buildSignupRequest(randomUsername(), randomEmail());
         Response response = signup(signupRequest);
-        assertEquals(response.asPrettyString(), "User registered successfully!");
+        assertEquals(response.getBody().asString(), "User registered successfully!");
     }
 
     // Username is already taken scenario
@@ -22,8 +22,8 @@ public class SignupTest {
     public void signupWithExistingUsernameTest() {
         SignupRequest signupRequest = buildSignupRequest(EXISTING_USERNAME, randomEmail());
         Response response = signup(signupRequest);
-        assertEquals(response.asPrettyString(), "Error: Username is already taken!");
         assertEquals(response.getStatusCode(), 400);
+        assertEquals(response.getBody().asString(), "Error: Username is already taken!");
     }
 
     // Existing email scenario
@@ -31,8 +31,8 @@ public class SignupTest {
     public void signupWithExistingEmailTest() {
         SignupRequest signupRequest = buildSignupRequest(randomUsername(), UserCredentials.email);
         Response response = signup(signupRequest);
-        assertEquals(response.asPrettyString(), "Error: Email is already in use!");
         assertEquals(response.getStatusCode(), 400);
+        assertEquals(response.getBody().asString(), "Error: Email is already in use!");
     }
 
     // Invalid email scenario

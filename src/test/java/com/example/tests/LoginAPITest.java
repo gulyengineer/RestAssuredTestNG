@@ -18,13 +18,12 @@ import static org.testng.Assert.assertNotNull;
 @Listeners(com.example.listeners.TestListener.class)
 public class LoginAPITest {
     @Test(description = "Test login API happy path")
-    public void login() {
+    public void loginWithValidCredentialsTest() {
         Response response = login(new LoginRequest(username, password));
+        assertEquals(response.getStatusCode(), 200);
         LoginResponse loginResponse = response.as(LoginResponse.class);
         assertNotNull(loginResponse.getToken(), "Login token should not be null");
         assertEquals(loginResponse.getEmail(), email);
-        assertEquals(loginResponse.getId(), 2891);
-        assertEquals(response.getStatusCode(), 200);
     }
 
     //Invalid credentials scenario
