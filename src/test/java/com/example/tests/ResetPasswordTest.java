@@ -20,21 +20,24 @@ public class ResetPasswordTest {
         String token = loginAndGetToken();
 
         UserService userService = new UserService();
-        Response changeResponse = userService.changePassword(
-                token,
-                new ResetPasswordRequest(currentPassword, newPassword, newPassword)
-        );
-        assertEquals(changeResponse.getStatusCode(), 200);
-
-        Response restoreResponse = userService.changePassword(
-                token,
-                new ResetPasswordRequest(newPassword, currentPassword, currentPassword)
-        );
-        assertEquals(restoreResponse.getStatusCode(), 200);
+        try {
+            Response changeResponse = userService.changePassword(
+                    token,
+                    new ResetPasswordRequest(currentPassword, newPassword, newPassword)
+            );
+            assertEquals(changeResponse.getStatusCode(), 200);
+        } finally {
+            // Restore password to original state to avoid side-effects on other tests
+            Response restoreResponse = userService.changePassword(
+                    token,
+                    new ResetPasswordRequest(newPassword, currentPassword, currentPassword)
+            );
+            assertEquals(restoreResponse.getStatusCode(), 200, "Failed to restore original password.");
+        }
     }
 
-    @Test(description = "Change password should reject empty token")
-    public void changePasswordShouldRejectEmptyToken() {
+    @Test(description = "Reset password should reject empty token")
+    public void resetPasswordShouldRejectEmptyToken() {
         UserService userService = new UserService();
         ResetPasswordRequest request = new ResetPasswordRequest(password, DEFAULT_PASSWORD, DEFAULT_PASSWORD);
         Response response = userService.changePassword("", request);
@@ -43,14 +46,14 @@ public class ResetPasswordTest {
         assertTrue(status >= 400 && status <= 500, "Expected client error for empty token, got " + status);
     }
 
-    @Test(description = "Change password should reject empty password")
-    public void changePasswordShouldRejectEmptyPassword() {
+    @Test(description = "Reset password should reject empty password")
+    public void resetPasswordShouldRejectEmptyPassword() {
         UserService userService = new UserService();
         String token = loginAndGetToken();
 
         ResetPasswordRequest request = new ResetPasswordRequest(password, "", "");
         Response response = userService.changePassword(token, request);
         int status = response.getStatusCode();
-        assertTrue(status >= 400 && status <= 500, "Expected client error for empty token, got " + status);
+        assertTrue(status >= 400 && status <= 500, "Expected client error for empty password, got " + status);
     }
 }
