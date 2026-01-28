@@ -1,0 +1,32 @@
+[
+  {
+    "testCase": "Empty username",
+    "username": "",
+    "password": "ValidPass123!",
+    "expectedStatus": 500
+  },
+  {
+    "testCase": "Null username",
+    "username": null,
+    "password": "ValidPass123!",
+    "expectedStatus": 500
+  },
+  {
+    "testCase": "SQL injection username",
+    "username": "admin' OR '1'='1",
+    "password": "ValidPass123!",
+    "expectedStatus": 401
+  },
+  {
+    "testCase": "Empty password",
+    "username": "validUser",
+    "password": "",
+    "expectedStatus": 500
+  },
+  {
+    "testCase": "Weak password",
+    "username": "validUser",
+    "password": "password",
+    "expectedStatus": 401
+  }
+]

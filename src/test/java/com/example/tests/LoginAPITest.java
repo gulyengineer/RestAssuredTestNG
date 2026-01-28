@@ -1,14 +1,14 @@
 package com.example.tests;
 
 import com.example.base.AuthService;
+import com.example.data.LoginDataProvider;
+import com.example.model.LoginTestData;
 import com.example.model.response.LoginResponse;
 import com.example.model.request.LoginRequest;
 import io.restassured.response.Response;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
-import static com.example.utils.TestDataUtils.INVALID_PASSWORD;
-import static com.example.utils.TestDataUtils.INVALID_USERNAME;
 import static com.example.utils.UserCredentials.email;
 import static com.example.utils.UserCredentials.password;
 import static com.example.utils.UserCredentials.username;
@@ -27,10 +27,11 @@ public class LoginAPITest {
     }
 
     //Invalid credentials scenario
-    @Test(description = "Test login API with invalid credentials")
-    public void loginWithInvalidCredentialsTest() {
-        Response response = login(new LoginRequest(INVALID_USERNAME, INVALID_PASSWORD));
-        assertEquals(response.getStatusCode(), 401);
+    @Test(dataProvider = "negativeLoginData",
+            dataProviderClass = LoginDataProvider.class)
+    public void loginWithInvalidCredentialsTest(LoginTestData data) {
+        Response response = login(new LoginRequest(data.username, data.password));
+        assertEquals(response.getStatusCode(), data.expectedStatus, data.testCase);
     }
 
     private Response login(LoginRequest loginRequest) {
