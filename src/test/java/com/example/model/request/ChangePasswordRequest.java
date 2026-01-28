@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ResetPasswordRequest {
+public class ChangePasswordRequest {
     private String currentPassword;
     private String newPassword;
     private String confirmPassword;
