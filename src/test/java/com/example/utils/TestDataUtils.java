@@ -15,6 +15,8 @@ public final class TestDataUtils {
     private static final String USERNAME_PREFIX = "TestUser";
     private static final String EMAIL_PREFIX = "user_";
     private static final String EMAIL_DOMAIN = "@test.com";
+    public static final String ACCOUNT_NUMBER = "9625462006";
+
 
     private TestDataUtils() {
     }
