@@ -2,6 +2,9 @@ package com.example.utils;
 
 import io.github.cdimascio.dotenv.Dotenv;
 
+import static org.testng.util.Strings.isNullOrEmpty;
+
+
 public class EnvVariables {
     public static final String username;
     public static final String password;
@@ -20,9 +23,9 @@ public class EnvVariables {
         email = getEnvOrDotenv("TEST_EMAIL", dotenv);
         BASE_URI = getEnvOrDotenv("BASE_URI", dotenv);
 
-        if (username == null || password == null || email == null || BASE_URI.isBlank()) {
+        if (isNullOrEmpty(username) || isNullOrEmpty(password) || isNullOrEmpty(email) || isNullOrEmpty(BASE_URI)) {
             throw new IllegalStateException(
-                    "Environment variable not found. Please set USERNAME, PASSWORD, BASE URI or EMAIL in your environment or .env file."
+                    "Required environment variable missing/blank. Please set TEST_USERNAME, TEST_PASSWORD, TEST_EMAIL, and BASE_URI in your environment or .env file."
             );
         }
     }
