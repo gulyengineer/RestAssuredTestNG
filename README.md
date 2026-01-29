@@ -16,16 +16,8 @@ The tests require credentials. Set these in your shell or a local `.env` file:
 TEST_USERNAME=your_username
 TEST_PASSWORD=your_password
 TEST_EMAIL=your_email@example.com
+BASE_URI=http://your_base_uri:8080/
 ```
-
-### Base URL
-The base URL is defined in `src/test/java/com/example/base/BaseService.java`:
-
-```
-public static final String BASE_URI = "http://64.227.160.186:8080/";
-```
-
-Update it if your API host/port changes.
 
 ### Logging
 Logs go to console and `logs/test.log` (Log4j2 config in `src/test/resources/log4j2.xml`).
