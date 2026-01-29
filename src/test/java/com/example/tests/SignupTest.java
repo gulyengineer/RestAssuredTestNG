@@ -2,7 +2,7 @@ package com.example.tests;
 
 import com.example.base.AuthService;
 import com.example.model.request.SignupRequest;
-import com.example.utils.UserCredentials;
+import com.example.utils.EnvVariables;
 import io.restassured.response.Response;
 import org.testng.annotations.Test;
 
@@ -29,7 +29,7 @@ public class SignupTest {
     // Existing email scenario
     @Test(description = "Test signup API with existing email")
     public void signupWithExistingEmailTest() {
-        SignupRequest signupRequest = buildSignupRequest(randomUsername(), UserCredentials.email);
+        SignupRequest signupRequest = buildSignupRequest(randomUsername(), EnvVariables.email);
         Response response = signup(signupRequest);
         assertEquals(response.getStatusCode(), 400);
         assertEquals(response.getBody().asString(), "Error: Email is already in use!");

@@ -11,7 +11,7 @@ import static com.example.utils.TestDataUtils.DEFAULT_FIRST_NAME;
 import static com.example.utils.TestDataUtils.DEFAULT_LAST_NAME;
 import static com.example.utils.TestDataUtils.randomPhone;
 import static com.example.utils.TestDataUtils.randomSuffix;
-import static com.example.utils.UserCredentials.email;
+import static com.example.utils.EnvVariables.email;
 import static org.testng.Assert.assertEquals;
 
 public class UpdateProfileTest {

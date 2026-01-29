@@ -8,7 +8,7 @@ import io.restassured.response.Response;
 import org.testng.annotations.Test;
 
 import static com.example.utils.TestDataUtils.DEFAULT_PASSWORD;
-import static com.example.utils.UserCredentials.password;
+import static com.example.utils.EnvVariables.password;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 

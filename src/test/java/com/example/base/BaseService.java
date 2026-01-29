@@ -1,13 +1,14 @@
 package com.example.base;
 
 import com.example.filters.LoggingFilter;
+import com.example.utils.EnvVariables;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 
 public class BaseService { // Wrapper for Rest Assured
-    public static final String BASE_URI = "http://64.227.160.186:8080/";
+    public static final String BASE_URI = EnvVariables.BASE_URI;
     private final RequestSpecification requestSpecification;
 
     static {

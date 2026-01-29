@@ -2,10 +2,11 @@ package com.example.utils;
 
 import io.github.cdimascio.dotenv.Dotenv;
 
-public class UserCredentials {
+public class EnvVariables {
     public static final String username;
     public static final String password;
     public static final String email;
+    public static final String BASE_URI;
 
     static {
         // Load .env file (if present)
@@ -17,10 +18,11 @@ public class UserCredentials {
         username = getEnvOrDotenv("TEST_USERNAME", dotenv);
         password = getEnvOrDotenv("TEST_PASSWORD", dotenv);
         email = getEnvOrDotenv("TEST_EMAIL", dotenv);
+        BASE_URI = getEnvOrDotenv("BASE_URI", dotenv);
 
-        if (username == null || password == null || email == null) {
+        if (username == null || password == null || email == null || BASE_URI.isBlank()) {
             throw new IllegalStateException(
-                    "Credential environment variable not found. Please set USERNAME, PASSWORD, or EMAIL in your environment or .env file."
+                    "Environment variable not found. Please set USERNAME, PASSWORD, BASE URI or EMAIL in your environment or .env file."
             );
         }
     }
