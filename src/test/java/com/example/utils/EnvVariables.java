@@ -9,7 +9,7 @@ public class EnvVariables {
     public static final String username;
     public static final String password;
     public static final String email;
-    public static final String BASE_URI;
+    public static final String base_uri;
 
     static {
         // Load .env file (if present)
@@ -21,9 +21,9 @@ public class EnvVariables {
         username = getEnvOrDotenv("TEST_USERNAME", dotenv);
         password = getEnvOrDotenv("TEST_PASSWORD", dotenv);
         email = getEnvOrDotenv("TEST_EMAIL", dotenv);
-        BASE_URI = getEnvOrDotenv("BASE_URI", dotenv);
+        base_uri = getEnvOrDotenv("BASE_URI", dotenv);
 
-        if (isNullOrEmpty(username) || isNullOrEmpty(password) || isNullOrEmpty(email) || isNullOrEmpty(BASE_URI)) {
+        if (isNullOrEmpty(username) || isNullOrEmpty(password) || isNullOrEmpty(email) || isNullOrEmpty(base_uri)) {
             throw new IllegalStateException(
                     "Required environment variable missing/blank. Please set TEST_USERNAME, TEST_PASSWORD, TEST_EMAIL, and BASE_URI in your environment or .env file."
             );

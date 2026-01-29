@@ -8,7 +8,7 @@ import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 
 public class BaseService { // Wrapper for Rest Assured
-    public static final String BASE_URI = EnvVariables.BASE_URI;
+    public static final String BASE_URI = EnvVariables.base_uri;
     private final RequestSpecification requestSpecification;
 
     static {

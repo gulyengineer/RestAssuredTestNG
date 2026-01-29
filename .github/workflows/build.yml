@@ -28,7 +28,7 @@ jobs:
           TEST_PASSWORD: ${{ secrets.TEST_PASSWORD }}
           TEST_EMAIL: ${{ secrets.TEST_EMAIL }}
           BASE_URI: ${{ secrets.BASE_URI }}
-      run: mvn clean test -Dsuite=suite -X
+      run: mvn clean test -Dsuite=suite
     - name: Publish Test Report
       if: always()
       uses: dorny/test-reporter@v1
