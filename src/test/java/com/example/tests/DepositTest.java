@@ -13,7 +13,7 @@ import static com.example.utils.TestDataUtils.ACCOUNT_NUMBER;
 
 @Listeners(com.example.listeners.TestListener.class)
 public class DepositTest {
-    private static final BigDecimal AMOUNT = BigDecimal.valueOf(10.0);
+    private static final BigDecimal AMOUNT = BigDecimal.TEN;
     private static final String DESCRIPTION = "test";
 
     @Test(description = "Test deposit API")

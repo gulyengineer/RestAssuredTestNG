@@ -6,12 +6,14 @@ import io.restassured.response.Response;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
+import java.math.BigDecimal;
+
 import static com.example.utils.AuthTestUtils.loginAndGetToken;
 import static com.example.utils.TestDataUtils.ACCOUNT_NUMBER;
 
 @Listeners(com.example.listeners.TestListener.class)
 public class WithdrawTest {
-    private static final double AMOUNT = 10.0;
+    private static final BigDecimal AMOUNT = BigDecimal.TEN;
     private static final String DESCRIPTION = "test";
 
 
