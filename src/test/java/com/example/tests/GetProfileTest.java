@@ -7,8 +7,8 @@ import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import static com.example.utils.AuthTestUtils.loginAndGetToken;
-import static com.example.utils.UserCredentials.email;
-import static com.example.utils.UserCredentials.username;
+import static com.example.utils.EnvVariables.email;
+import static com.example.utils.EnvVariables.username;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 

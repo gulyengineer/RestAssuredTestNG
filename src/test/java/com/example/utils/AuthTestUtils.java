@@ -5,8 +5,8 @@ import com.example.model.request.LoginRequest;
 import com.example.model.response.LoginResponse;
 import io.restassured.response.Response;
 
-import static com.example.utils.UserCredentials.password;
-import static com.example.utils.UserCredentials.username;
+import static com.example.utils.EnvVariables.password;
+import static com.example.utils.EnvVariables.username;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;

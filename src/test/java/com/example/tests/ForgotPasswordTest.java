@@ -4,7 +4,7 @@ import com.example.base.AuthService;
 import io.restassured.response.Response;
 import org.testng.annotations.Test;
 
-import static com.example.utils.UserCredentials.email;
+import static com.example.utils.EnvVariables.email;
 import static org.testng.Assert.assertTrue;
 import static org.testng.AssertJUnit.assertEquals;
 

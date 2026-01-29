@@ -9,9 +9,9 @@ import io.restassured.response.Response;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
-import static com.example.utils.UserCredentials.email;
-import static com.example.utils.UserCredentials.password;
-import static com.example.utils.UserCredentials.username;
+import static com.example.utils.EnvVariables.email;
+import static com.example.utils.EnvVariables.password;
+import static com.example.utils.EnvVariables.username;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 
